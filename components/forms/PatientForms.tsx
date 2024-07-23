@@ -114,7 +114,7 @@ const PatientForms = () => {
           type="submit"
           className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100"
         >
-          SIGN IN WITH OTP
+          Sign in with OTP
         </Button>
         <div className="w-full flex items-center justify-center">
           <Badge variant="outline">OR</Badge>
@@ -122,7 +122,7 @@ const PatientForms = () => {
         <Button
           className="bg-green-600 border-2 border-green-500 hover:bg-green-500 hover:border-green-500 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100"
         >
-          <img src="/assets/icons/icons8-google.svg" alt="google" width={30} height={30} className="mr-2"/> SIGN IN WITH GOOGLE
+          <img src="/assets/icons/icons8-google.svg" alt="google" width={30} height={30} className="mr-2"/> Sign in with Google
         </Button>
       </form>
     </Form>
