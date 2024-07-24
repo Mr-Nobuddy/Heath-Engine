@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import MedicalInfo from "@/components/MedicalInfo";
+import Identification from "@/components/Identification";
 
 const Registration = () => {
   const [number, setNumber] = useState<E164Number>("");
@@ -228,6 +229,7 @@ const Registration = () => {
         </div>
 
         <MedicalInfo />
+        <Identification />
       </section>
     </div>
   );

@@ -36,4 +36,24 @@ export const Doctors = [
       name: "Hardik Sharma",
     },
   ];
+
+  export const IdentificationTypes = [
+    "Birth Certificate",
+    "Driver's License",
+    "Medical Insurance Card/Policy",
+    "Military ID Card",
+    "National Identity Card",
+    "Passport",
+    "Resident Alien Card (Green Card)",
+    "Social Security Card",
+    "State ID Card",
+    "Student ID Card",
+    "Voter ID Card",
+  ];
+
+  export const checkboxes = [
+    "I consent to receive treatment for my health condition",
+    "I consent to the use and disclosure of my health information for treatment purpose",
+    "I acknowledge that I have reveiwed and agree to the privacy policy"
+  ]
   
