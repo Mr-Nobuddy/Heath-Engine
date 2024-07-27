@@ -15,8 +15,10 @@ import { Input } from "./ui/input";
 import { FileUploader } from "./FileUploader";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 const Identification = () => {
+  const Router = useRouter()
   return (
     <div className="sub-container max-w-[696px] space-y-8">
       <h1 className="header">Identification and Verification</h1>
@@ -74,7 +76,7 @@ const Identification = () => {
         </div>
       </div>
 
-      <Button className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100">
+      <Button className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100" onClick={() => Router.push('appointments')}>
         Submit and Continue
       </Button>
     </div>
