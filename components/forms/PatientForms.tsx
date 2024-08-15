@@ -21,121 +21,130 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
+import { login, signup, signWithGoogle } from "@/app/actions";
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  // email: z.string().min(1,{message:"This field has to be filled"}).email("This is not a valid email")
-});
+// const formSchema = z.object({
+//   username: z.string().min(2, {
+//     message: "Username must be at least 2 characters.",
+//   }),
+//   // email: z.string().min(1,{message:"This field has to be filled"}).email("This is not a valid email")
+// });
 
-const PatientForms = () => {
-  const [number, setNumber] = useState<E164Number>("");
-  
+const PatientForms = ({ id, first }: { id: string; first: boolean }) => {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const Router = useRouter();
 
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      // email:""
-    },
-  });
-
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
-
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
-        <section className="mb-12 space-y-4">
-          <h1 className="header">Hi there 👋</h1>
-          <p className="text-dark-700">Schedule your first appointment</p>
-        </section>
+    // <Form {...form}>
+    // </Form>
+    <form>
+      <div>
+        <div className="space-y-6 flex-1">
+          <section className="mb-12 space-y-4">
+            <h1 className="header">Hi there 👋</h1>
+            <p className="text-dark-700">Schedule your first appointment</p>
+          </section>
 
-        {/* <CustomFormFields
-          control={form.control}
-          fieldtype={"input"}
-          name="name"
-          label="Full Name"
-          placeholder="Your Full Name"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
-        /> */}
-
-        <div className="flex flex-col gap-5">
-          <Label className="text-dark-700">Full Name</Label>
-          <div className="flex rounded-md border-2 border-dark-500 bg-dark-400 hover:border-green-400">
-            <Image
-              src="/assets/icons/user.svg"
-              alt=""
-              height={24}
-              width={24}
-              className="ml-2"
-            />
-            <Input
-              // type="email"
-              placeholder="Your Full Name"
-              className="shad-input border-0"
-            />
+          <div className="flex flex-col gap-5">
+            <Label className="text-dark-700">Full Name</Label>
+            <div className="flex rounded-md border-2 border-dark-500 bg-dark-400 hover:border-green-400">
+              <Image
+                src="/assets/icons/user.svg"
+                alt=""
+                height={24}
+                width={24}
+                className="ml-2"
+              />
+              <Input
+                // type="email"
+                placeholder="Your Full Name"
+                className="shad-input border-0"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                name="name"
+              />
+              <Input value={id} className="hidden" name="id" />
+            </div>
           </div>
-        </div>
 
-        <div className="flex flex-col gap-5">
-          <Label className="text-dark-700">Email Address</Label>
-          <div className="flex rounded-md border-2 border-dark-500 bg-dark-400 hover:border-green-400">
-            <Image
-              src="/assets/icons/email.svg"
-              alt=""
-              height={24}
-              width={24}
-              className="ml-2"
-            />
-            <Input
-              // type="email"
-              placeholder="Your Email Address"
-              className="shad-input border-0"
-            />
+          <div className="flex flex-col gap-5">
+            <Label className="text-dark-700">Email Address</Label>
+            <div className="flex rounded-md border-2 border-dark-500 bg-dark-400 hover:border-green-400">
+              <Image
+                src="/assets/icons/email.svg"
+                alt=""
+                height={24}
+                width={24}
+                className="ml-2"
+              />
+              <Input
+                // type="email"
+                placeholder="Your Email Address"
+                className="shad-input border-0"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="flex flex-col gap-2">
-          <Label className="text-dark-700">Phone Number</Label>
+          <div className="flex flex-col gap-5">
+            <Label className="text-dark-700">Password</Label>
+            <div className="flex rounded-md border-2 border-dark-500 bg-dark-400 hover:border-green-400">
+              <Image
+                src="/assets/icons/icons8-password.svg"
+                alt=""
+                height={24}
+                width={24}
+                className="ml-2"
+              />
+              <Input
+                // type="email"
+                placeholder="Your Password"
+                className="shad-input border-0"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+              />
+            </div>
+          </div>
 
-          <PhoneInput
-            placeholder="Enter phone number"
-            onChange={setNumber}
-            className="input-phone border-2 border-dark-300"
-          />
-        </div>
+          <div className="w-full flex gap-5">
+            <Button
+              type="submit"
+              className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-[50%] mt-10 hover:scale-110 transition ease-in-out duration-200 active:scale-100"
+              formAction={login}
+            >
+              Log In
+            </Button>
+            <Button
+              type="submit"
+              className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-[50%] mt-10 hover:scale-110 transition ease-in-out duration-200 active:scale-100"
+              formAction={signup}
+            >
+              Sign up
+            </Button>
+          </div>
 
-        <Button
-          type="submit"
-          className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100"
-          onClick={() => Router.push('/registration')}
-        >
-          Sign in with OTP
-        </Button>
-        <div className="w-full flex items-center justify-center">
-          <Badge variant="outline">OR</Badge>
+          <div className="w-full flex items-center justify-center">
+            <Badge variant="outline">OR</Badge>
+          </div>
+          <Button className="bg-green-600 border-2 border-green-500 hover:bg-green-500 hover:border-green-500 w-full mt-10 hover:scale-110 transition ease-in-out duration-200 active:scale-100" formAction={signWithGoogle}>
+            <img
+              src="/assets/icons/icons8-google.svg"
+              alt="google"
+              width={30}
+              height={30}
+              className="mr-2"
+            />{" "}
+            Sign in with Google
+          </Button>
         </div>
-        <Button className="bg-green-600 border-2 border-green-500 hover:bg-green-500 hover:border-green-500 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100">
-          <img
-            src="/assets/icons/icons8-google.svg"
-            alt="google"
-            width={30}
-            height={30}
-            className="mr-2"
-          />{" "}
-          Sign in with Google
-        </Button>
-      </form>
-    </Form>
+      </div>
+    </form>
   );
 };
 

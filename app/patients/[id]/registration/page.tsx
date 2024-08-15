@@ -12,7 +12,7 @@ import MedicalInfo from "@/components/MedicalInfo";
 import Identification from "@/components/Identification";
 
 const Registration = () => {
-  const [number, setNumber] = useState<E164Number>("");
+  const [number, setNumber] = useState<string>("");
   const [startDate, setStartDate] = useState(new Date());
   const [gender, setGender] = useState<string>("");
   return (

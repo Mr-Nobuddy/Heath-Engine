@@ -1,10 +1,24 @@
+'use client'
 import PatientForms from "@/components/forms/PatientForms";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useGetUser } from "@/hooks/useGetUser";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [id,setID] = useState('');
+  const [isFirstTime,setIsFirstTime] = useState(true);
+  useEffect(() => {
+    useGetUser().then((res) => {
+      // console.log(res);
+      setID(res?.id as string);
+      if(res?.id){
+        setIsFirstTime(false);
+      }
+    })
+  })
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -17,7 +31,7 @@ export default function Home() {
             className="mb-3 w-fit"
           />
 
-          <PatientForms />
+          <PatientForms id={id} first={isFirstTime}/>
 
           <div className="text-14-regular flex justify-between mt-14">
             <p className="justify-items-end text-dark-600 xl:text-left p-2">

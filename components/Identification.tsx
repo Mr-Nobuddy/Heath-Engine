@@ -76,7 +76,7 @@ const Identification = () => {
         </div>
       </div>
 
-      <Button className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100" onClick={() => Router.push('appointments')}>
+      <Button className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100" onClick={() => Router.push('/appointments')}>
         Submit and Continue
       </Button>
     </div>
