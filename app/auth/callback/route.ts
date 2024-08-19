@@ -3,15 +3,15 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
 
 export async function GET(request: Request) {
-  const user = async () => {
-    const supabase = createClient()
-    const {data,error} = await supabase.auth.getUser();
-    return data.user?.id
-  }
+  // const user = async () => {
+  //   const supabase = createClient()
+  //   const {data,error} = await supabase.auth.getUser();
+  //   return data.user?.id
+  // }
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
   // if "next" is in param, use it as the redirect URL
-  const next = searchParams.get('next') ?? `appointments`
+  const next = searchParams.get('next') ?? `/`
 
 
   if (code) {

@@ -22,8 +22,8 @@ export async function login(formData: FormData) {
     redirect("/error");
   }
 
-  revalidatePath(`/patients/${formData.get("id")}/registration`, "layout");
-  redirect(`/patients/${formData.get("id")}/registration`);
+  revalidatePath(`/`, "layout");
+  redirect(`/`);
 }
 
 export async function signup(formData: FormData) {
@@ -44,8 +44,8 @@ export async function signup(formData: FormData) {
     redirect("/error");
   }
 
-  revalidatePath("/appointments", "layout");
-  redirect("/appointments");
+  revalidatePath("/", "layout");
+  redirect("/");
 }
 
 export async function signWithGoogle(){

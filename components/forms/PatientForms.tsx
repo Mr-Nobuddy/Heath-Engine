@@ -21,7 +21,7 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import { Badge } from "../ui/badge";
 import { useRouter } from "next/navigation";
-import { login, signup, signWithGoogle } from "@/app/actions";
+import { login, signup, signWithGoogle } from "@/app/login/actions";
 
 // const formSchema = z.object({
 //   username: z.string().min(2, {
