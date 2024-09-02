@@ -74,14 +74,14 @@ const HomePage = () => {
   const [id, setID] = useState("");
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
+  
   useEffect(() => {
     useGetUser().then((res) => {
-      // console.log(res?.user_metadata.full_name);
       setID(res?.id as string);
       setName(res?.user_metadata.full_name as string)
       setEmail(res?.email as string)
     });
-  });
+  },[]);
 
   const router = useRouter();
   return (

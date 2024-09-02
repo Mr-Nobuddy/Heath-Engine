@@ -38,8 +38,6 @@ const PatientForms = ({ id, first }: { id: string; first: boolean }) => {
   const Router = useRouter();
 
   return (
-    // <Form {...form}>
-    // </Form>
     <form>
       <div>
         <div className="space-y-6 flex-1">
