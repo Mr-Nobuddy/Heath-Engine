@@ -112,6 +112,11 @@ const Registration = () => {
     }
   }
 
+  const setPhysician = (doctor:string) => {
+    setPrimaryPhysician(doctor)
+    console.log(doctor);
+  }
+
   return (
     <div className="flex h-screen max-h-screen">
       <form
@@ -129,7 +134,7 @@ const Registration = () => {
               className="mb-3 w-fit"
             />
             <div className="mb-12 space-y-4">
-              <h1 className="header">Welcome 👋</h1>
+              <h1 className="header">Welcome {name}👋</h1>
               <p className="text-dark-700">Let us know more about yourself</p>
             </div>
             <div>
@@ -368,14 +373,11 @@ const Registration = () => {
                         <SelectItem
                           key={idx}
                           value={item.name}
-                          // style={{
-                          //   backgroundImage:
-                          //     "url('/assets/images/appointments-bg.png')",
-                          //   backgroundRepeat: "no-repeat",
-                          //   backgroundSize: "100% 60px",
-                          // }}
                           className="h-16"
-                          onClick={() => setPrimaryPhysician(item.name)}
+                          onClick={() => {
+                            // setPrimaryPhysician(item.name)
+                            setPhysician(item.name)
+                          }}
                         >
                           <div className="flex items-center space-x-2">
                             <Image

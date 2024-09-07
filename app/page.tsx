@@ -69,37 +69,93 @@ import React, { useEffect, useState } from "react";
 import { logout } from "./logout/actions";
 import { useGetUser } from "@/hooks/useGetUser";
 import { useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
+import { BackgroundBeamsWithCollisionDemo } from "@/components/Hero";
+import { motion } from "framer-motion";
+import { LampContainer } from "@/components/ui/lamp";
+import { FloatingNav } from "@/components/ui/FloatingNavbar";
+import { navItems } from "@/constants";
 
 const HomePage = () => {
+  const supabase = createClient();
   const [id, setID] = useState("");
-  const [name,setName] = useState('');
-  const [email,setEmail] = useState('');
-  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [userExists, setUserExists] = useState(false);
+
   useEffect(() => {
     useGetUser().then((res) => {
       setID(res?.id as string);
-      setName(res?.user_metadata.full_name as string)
-      setEmail(res?.email as string)
+      setName(res?.user_metadata.full_name as string);
+      setEmail(res?.email as string);
+      if (res?.email) {
+        checkUser(res?.email);
+      }
     });
-  },[]);
+  }, []);
+
+  const checkUser = async (mail: string) => {
+    const { data, error } = await supabase
+      .from("patient")
+      .select("name")
+      .eq("email", mail);
+
+    if (error) {
+      console.log("error occurred", error);
+    } else {
+      // console.log(data.length);
+      if (data.length !== 0) {
+        setUserExists(true);
+      }
+    }
+  };
 
   const router = useRouter();
+
   return (
-    <div className="text-white">
-      <h1>HomePage</h1>
-      <h1>Hello {name}</h1>
-      <h1>Email is {email}</h1>
-      <form action={logout}>
-        <button
-          type="submit"
-          className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30"
+    <div>
+      {/* Navbar */}
+      <FloatingNav navItems={navItems} />
+
+      {/* Hero section */}
+      <BackgroundBeamsWithCollisionDemo />
+
+      {/* appointments section */}
+      <LampContainer>
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
         >
-          Logout
-        </button>
-      </form>
-      <button className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30" onClick={() => router.push(`/patients/${id}/registration`)}>
-        registration
-      </button>
+          Book Appointments <br /> in Just a Click
+        </motion.h1>
+        {userExists ? (
+          <button
+            className="p-[3px] relative"
+            onClick={() => router.push(`/patients/${id}/appointments`)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-lg" />
+            <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+              Book an Appointment
+            </div>
+          </button>
+        ) : (
+          <button
+            className="p-[3px] relative"
+            onClick={() => router.push(`/patients/${id}/registration`)}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-lg" />
+            <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+              Register yourself
+            </div>
+          </button>
+        )}
+      </LampContainer>
     </div>
   );
 };

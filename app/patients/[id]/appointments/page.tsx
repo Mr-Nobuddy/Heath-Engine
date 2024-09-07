@@ -2,7 +2,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -16,8 +16,15 @@ import { Doctors } from "@/constants";
 import { Textarea } from "@/components/ui/textarea";
 import DatePicker from "react-datepicker";
 import { Button } from "@/components/ui/button";
+import { useGetUser } from "@/hooks/useGetUser";
 
 const Appointments = () => {
+  const [name, setName] = useState("");
+  useEffect(() => {
+    useGetUser().then((res) => {
+      setName(res?.user_metadata.full_name as string);
+    });
+  }, []);
   const [startDate, setStartDate] = useState(new Date());
   return (
     <div className="flex h-screen max-h-screen">
@@ -31,7 +38,7 @@ const Appointments = () => {
             className="mb-3 w-fit"
           />
           <div className="mb-12 space-y-4">
-            <h1 className="header">Hey there 👋</h1>
+            <h1 className="header">Hey there {name}👋</h1>
             <p className="text-dark-700">
               Request a new appointment in 10 seconds
             </p>

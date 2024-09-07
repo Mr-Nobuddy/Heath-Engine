@@ -57,3 +57,13 @@ export const Doctors = [
     "I acknowledge that I have reveiwed and agree to the privacy policy"
   ]
   
+  export const navItems = [
+    {
+      name:'Home',
+      link:"/",
+    },
+    {
+      name:"My appointments",
+      link:'/myappointments',
+    }
+  ]
