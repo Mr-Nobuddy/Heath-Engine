@@ -112,10 +112,10 @@ const Registration = () => {
     }
   }
 
-  const setPhysician = (doctor:string) => {
-    setPrimaryPhysician(doctor)
+  const setPhysician = (doctor: string) => {
+    setPrimaryPhysician(doctor);
     console.log(doctor);
-  }
+  };
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -376,7 +376,7 @@ const Registration = () => {
                           className="h-16"
                           onClick={() => {
                             // setPrimaryPhysician(item.name)
-                            setPhysician(item.name)
+                            setPhysician(item.name);
                           }}
                         >
                           <div className="flex items-center space-x-2">

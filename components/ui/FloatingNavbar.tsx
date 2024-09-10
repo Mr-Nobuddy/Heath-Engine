@@ -9,10 +9,13 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { logout } from "@/app/logout/actions";
+import { AnimatedTooltipPreview } from "../ProfileTab";
 
 export const FloatingNav = ({
   navItems,
   className,
+  name,
+  image
 }: {
   navItems: {
     name: string;
@@ -20,6 +23,8 @@ export const FloatingNav = ({
     icon?: JSX.Element;
   }[];
   className?: string;
+  name:string,
+  image:string
 }) => {
   const { scrollYProgress } = useScroll();
 
@@ -66,7 +71,7 @@ export const FloatingNav = ({
             key={`link=${idx}`}
             href={navItem.link}
             className={cn(
-              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 hover:bg-gradient-to-r from-green-300 to-teal-700 rounded-full px-8 py-2 transition duration-200"
             )}
           >
             <span className="block sm:hidden">{navItem.icon}</span>
@@ -74,11 +79,30 @@ export const FloatingNav = ({
           </Link>
         ))}
         <form action={logout}>
-          <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
+          {/* <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
             <span>Logout</span>
             <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+          </button> */}
+          <button
+            className="p-[3px] relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-full" />
+            <div className="px-8 py-2  bg-black rounded-full  relative group transition duration-200 text-white hover:bg-transparent">
+              Logout
+            </div>
           </button>
+          {/* <button
+            className="p-[3px] relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-full" />
+            <div className="px-8 py-2  bg-black rounded-full  relative group transition duration-200 text-white hover:bg-transparent">
+              Logout
+            </div>
+          </button> */}
         </form>
+        
+          {/* <AnimatedTooltipPreview name={name} image={image}/> */}
+        
       </motion.div>
     </AnimatePresence>
   );

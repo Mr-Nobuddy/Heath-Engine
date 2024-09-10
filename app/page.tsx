@@ -75,19 +75,25 @@ import { motion } from "framer-motion";
 import { LampContainer } from "@/components/ui/lamp";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 import { navItems } from "@/constants";
+import { IconHome } from "@tabler/icons-react";
+import { IconDashboard } from '@tabler/icons-react';
+import { IconUserCircle } from '@tabler/icons-react';
 
 const HomePage = () => {
   const supabase = createClient();
   const [id, setID] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState("");
   const [userExists, setUserExists] = useState(false);
 
   useEffect(() => {
     useGetUser().then((res) => {
+      // console.log(res)
       setID(res?.id as string);
       setName(res?.user_metadata.full_name as string);
       setEmail(res?.email as string);
+      setImage(res?.user_metadata.avatar_url as string);
       if (res?.email) {
         checkUser(res?.email);
       }
@@ -112,13 +118,37 @@ const HomePage = () => {
 
   const router = useRouter();
 
+  // const FloatingNavItems = [
+  //   {
+  //     title: "Home",
+  //     icon: (
+  //       <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+  //     ),
+  //     href:'/'
+  //   },
+  //   {
+  //     title:'My Appointments',
+  //     icon:(
+  //       <IconDashboard className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+  //     ),
+  //     href:'/myappointments'
+  //   },
+  //   {
+  //     title:"Profile",
+  //     icon:(
+  //       <IconUserCircle className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+  //     ),
+  //     href:'/profile'
+  //   }
+  // ];
+
   return (
     <div>
       {/* Navbar */}
-      <FloatingNav navItems={navItems} />
+      <FloatingNav navItems={navItems} name={name} image={image} />
 
       {/* Hero section */}
-      <BackgroundBeamsWithCollisionDemo />
+      <BackgroundBeamsWithCollisionDemo name={name} />
 
       {/* appointments section */}
       <LampContainer>

@@ -65,5 +65,11 @@ export const Doctors = [
     {
       name:"My appointments",
       link:'/myappointments',
+    },
+    {
+      name:'Profile',
+      link:'/profile',
     }
   ]
+
+  
