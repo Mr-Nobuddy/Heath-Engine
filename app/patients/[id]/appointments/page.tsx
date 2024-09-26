@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useGetUser } from "@/hooks/useGetUser";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { v4 as uuidv4 } from 'uuid';
 
 const Appointments = () => {
   const supabase = createClient();
@@ -53,7 +54,9 @@ const Appointments = () => {
           appointmentReason: appointmentReason,
           additionalNotes: notes,
           dateOfAppointment: date,
-          isScheduled:false
+          isScheduled:false,
+          isCancelled:false,
+          appointmentID:uuidv4()
         },
       ]);
 

@@ -162,7 +162,8 @@ const HomePage = () => {
           }}
           className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
         >
-          Book Appointments <br /> in Just a Click
+          Book Appointments <br /> in Just a Click <br/>
+
         </motion.h1>
         {userExists ? (
           <button
@@ -170,7 +171,7 @@ const HomePage = () => {
             onClick={() => router.push(`/patients/${id}/appointments`)}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-lg" />
-            <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            <div className="px-8 py-2  bg-black-900 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
               Book an Appointment
             </div>
           </button>
@@ -180,7 +181,7 @@ const HomePage = () => {
             onClick={() => router.push(`/patients/${id}/registration`)}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-300 to-teal-700 rounded-lg" />
-            <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
+            <div className="px-8 py-2  bg-black-900 rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
               Register yourself
             </div>
           </button>
