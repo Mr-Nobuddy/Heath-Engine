@@ -53,12 +53,16 @@ const Registration = () => {
   const [documentUrl, setDocumentUrl] = useState("");
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
     useGetUser().then((res) => {
       setID(res?.id as string);
       setName(res?.user_metadata.full_name as string);
       setEmail(res?.email as string);
     });
-  }, []);
+  };
 
   const router = useRouter();
 

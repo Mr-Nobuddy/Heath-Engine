@@ -16,6 +16,10 @@ const MyAppointments = () => {
   const [appointmentData, setAppointmentData] = useState<any>([]);
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
     useGetUser().then((res) => {
       setID(res?.id as string);
       setName(res?.user_metadata.full_name as string);
@@ -23,7 +27,7 @@ const MyAppointments = () => {
         getAppointments(res?.id);
       }
     });
-  }, []);
+  };
 
   const getAppointments = async (id: string) => {
     const { data, error } = await supabase
@@ -93,7 +97,7 @@ const MyAppointments = () => {
           </div>
         </div>
         <div className="sub-container max-w-[796px] space-y-8">
-          <DataTableDemo data={tableData}/>
+          <DataTableDemo data={tableData} />
         </div>
         {/* <FloatingDockDemo /> */}
       </section>

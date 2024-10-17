@@ -19,7 +19,7 @@ import { Button } from "@/components/ui/button";
 import { useGetUser } from "@/hooks/useGetUser";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Appointments = () => {
   const supabase = createClient();
@@ -29,16 +29,20 @@ const Appointments = () => {
   const [appointmentReason, setAppointmentReason] = useState("");
   const [notes, setNotes] = useState("");
   const [date, setDate] = useState(new Date());
-  const [isInserted,setIsInserted] = useState(false);
+  const [isInserted, setIsInserted] = useState(false);
 
   const router = useRouter();
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
     useGetUser().then((res) => {
       setID(res?.id as string);
       setName(res?.user_metadata.full_name as string);
     });
-  }, []);
+  };
 
   const handleInput = (value: string) => {
     setDoctor(value);
@@ -54,20 +58,19 @@ const Appointments = () => {
           appointmentReason: appointmentReason,
           additionalNotes: notes,
           dateOfAppointment: date,
-          isScheduled:false,
-          isCancelled:false,
-          appointmentID:uuidv4()
+          isScheduled: false,
+          isCancelled: false,
+          appointmentID: uuidv4(),
         },
       ]);
 
       if (error) {
         console.log("error occurred", error.message);
       } else {
-        router.push('/success')
+        router.push("/success");
         console.log("inserted successfully");
         // console.log(data);
         // setIsInserted(true);
-
       }
     } else {
       alert("Please fill out all the fields");
@@ -185,7 +188,7 @@ const Appointments = () => {
                 </div>
               </div>
 
-              <Button 
+              <Button
                 className="bg-green-500 border-2 border-green-500 hover:bg-green-600 hover:border-green-400 w-full mt-10 hover:scale-110 transition ease-in-out duration-300 active:scale-100"
                 // onClick={() => {isInserted ? router.push('/success') : ""}}
               >

@@ -88,6 +88,10 @@ const HomePage = () => {
   const [userExists, setUserExists] = useState(false);
 
   useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
     useGetUser().then((res) => {
       // console.log(res)
       setID(res?.id as string);
@@ -98,7 +102,7 @@ const HomePage = () => {
         checkUser(res?.email);
       }
     });
-  }, []);
+  }
 
   const checkUser = async (mail: string) => {
     const { data, error } = await supabase
