@@ -48,7 +48,7 @@ export default function Home() {
       </section>
       <div className="w-[50%]">
         <img
-          src="/assets/images/new-doctor.avif"
+          src="/assets/images/login-img.png"
           alt="onboarding"
           className="w-full"
         />

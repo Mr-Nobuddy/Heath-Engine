@@ -8,7 +8,7 @@ import PhoneInput from "react-phone-number-input";
 import { Button } from "@/components/ui/button";
 
 const AdminLogin = () => {
-  const [number, setNumber] = useState<E164Number>("");
+  // const [number, setNumber] = useState<E164Number>("");
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -46,12 +46,16 @@ const AdminLogin = () => {
 
           <div className="flex flex-col gap-2">
             <Label className="text-dark-700">Phone Number</Label>
+            <Input
+              placeholder="Your Password"
+              className="shad-input border-0"
+            />
 
-            <PhoneInput
+            {/* <PhoneInput
               placeholder="Enter phone number"
               onChange={setNumber}
               className="input-phone border-2 border-dark-300"
-            />
+            /> */}
           </div>
           <Button
             type="submit"
